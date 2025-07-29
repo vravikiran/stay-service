@@ -37,19 +37,19 @@ public class StayDetailController {
 	}
 
 	@PatchMapping("/activate")
-	public ResponseEntity<String> makeStayOperational(@RequestParam String id) {
+	public ResponseEntity<String> makeStayOperational(@RequestParam String id) throws StayNotFoundException {
 		stayDetailService.activateStay(id);
 		return ResponseEntity.ok("Stay operational for business");
 	}
 
 	@PatchMapping("/deactivate")
-	public ResponseEntity<String> suspendOpOfStay(@RequestParam String id) {
+	public ResponseEntity<String> suspendOpOfStay(@RequestParam String id) throws StayNotFoundException {
 		stayDetailService.deactivateStay(id);
-		return ResponseEntity.ok("Stay operations suspensed/terminated successfully");
+		return ResponseEntity.ok("Stay operations suspended/terminated successfully");
 	}
 
 	@GetMapping("/detail/id")
-	public ResponseEntity<StayDetail> getStayDetails(@RequestParam String id) {
+	public ResponseEntity<StayDetail> getStayDetails(@RequestParam String id) throws StayNotFoundException {
 		StayDetail stayDetail = stayDetailService.getStayDetail(id);
 		return ResponseEntity.ok(stayDetail);
 	}
@@ -67,7 +67,7 @@ public class StayDetailController {
 	}
 
 	@PatchMapping("/approve")
-	public ResponseEntity<String> approveHomeStay(@RequestParam String id) {
+	public ResponseEntity<String> approveHomeStay(@RequestParam String id) throws StayNotFoundException {
 		stayDetailService.approveHomeStay(id);
 		return ResponseEntity.ok("Home stay approved successfully");
 	}
@@ -90,7 +90,7 @@ public class StayDetailController {
 	@DeleteMapping("/remove/restuarant")
 	public ResponseEntity<String> removeRestuarantFromStay(@RequestParam String stayId, @RequestParam int restId)
 			throws RestaurantNotFoundException, StayNotFoundException {
-		stayDetailService.removeRestuarantFromStay(stayId, restId);
+		stayDetailService.removeRestaurantFromStay(stayId, restId);
 		return ResponseEntity.ok("Restaurant removed successfully from stay");
 	}
 
