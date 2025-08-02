@@ -3,6 +3,7 @@ package com.travelapp.stay_service.controllers;
 import java.util.Map;
 import java.util.Set;
 
+import com.travelapp.stay_service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
@@ -18,10 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.travelapp.stay_service.entities.Restaurant;
 import com.travelapp.stay_service.entities.StayDetail;
-import com.travelapp.stay_service.exceptions.DuplicateRestaurantException;
-import com.travelapp.stay_service.exceptions.RestaurantNotFoundException;
-import com.travelapp.stay_service.exceptions.RoomDetailNotFoundException;
-import com.travelapp.stay_service.exceptions.StayNotFoundException;
 import com.travelapp.stay_service.services.StayDetailService;
 
 @RestController
@@ -67,7 +64,7 @@ public class StayDetailController {
 	}
 
 	@PatchMapping("/approve")
-	public ResponseEntity<String> approveHomeStay(@RequestParam String id) throws StayNotFoundException {
+	public ResponseEntity<String> approveHomeStay(@RequestParam String id) throws StayNotFoundException, InvalidDataException {
 		stayDetailService.approveHomeStay(id);
 		return ResponseEntity.ok("Home stay approved successfully");
 	}
@@ -87,7 +84,7 @@ public class StayDetailController {
 		return ResponseEntity.ok(stayDetail);
 	}
 
-	@DeleteMapping("/remove/restuarant")
+	@DeleteMapping("/remove/restaurant")
 	public ResponseEntity<String> removeRestuarantFromStay(@RequestParam String stayId, @RequestParam int restId)
 			throws RestaurantNotFoundException, StayNotFoundException {
 		stayDetailService.removeRestaurantFromStay(stayId, restId);
@@ -98,7 +95,7 @@ public class StayDetailController {
 	public ResponseEntity<String> updateRoomFacilities(@RequestParam String stayId, @RequestParam int roomId,
 			@RequestBody Set<String> roomFacilities) throws StayNotFoundException, RoomDetailNotFoundException {
 		stayDetailService.updateRoomFacilities(stayId, roomId, roomFacilities);
-		return ResponseEntity.ok("Room facilities are updated sucessfully");
+		return ResponseEntity.ok("Room facilities are updated successfully");
 	}
 
 	@PatchMapping("/update")

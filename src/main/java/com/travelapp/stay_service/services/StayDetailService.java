@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import com.travelapp.stay_service.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
@@ -15,10 +16,6 @@ import org.springframework.stereotype.Service;
 import com.travelapp.stay_service.entities.Restaurant;
 import com.travelapp.stay_service.entities.StayDetail;
 import com.travelapp.stay_service.enums.PropertyTypeEnum;
-import com.travelapp.stay_service.exceptions.DuplicateRestaurantException;
-import com.travelapp.stay_service.exceptions.RestaurantNotFoundException;
-import com.travelapp.stay_service.exceptions.RoomDetailNotFoundException;
-import com.travelapp.stay_service.exceptions.StayNotFoundException;
 import com.travelapp.stay_service.repositories.StayDetailRepository;
 
 @Service
@@ -92,7 +89,7 @@ public class StayDetailService {
                 page, size);
     }
 
-    public void approveHomeStay(String id) throws StayNotFoundException {
+    public void approveHomeStay(String id) throws StayNotFoundException, InvalidDataException {
         Optional<StayDetail> stayDetailOpt = stayDetailRepository.findById(id);
         if (stayDetailOpt.isPresent()) {
             StayDetail stayDetail = stayDetailOpt.get();
@@ -101,6 +98,8 @@ public class StayDetailService {
                 stayDetail.setIsactive(true);
                 stayDetail.setUpdatedDate(LocalDate.now());
                 stayDetailRepository.save(stayDetail);
+            } else {
+                throw new InvalidDataException("Not a home stay");
             }
         } else {
             throw new StayNotFoundException("No stay found with given id :: " + id);
