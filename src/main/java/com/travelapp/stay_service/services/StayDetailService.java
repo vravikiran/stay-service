@@ -1,13 +1,19 @@
 package com.travelapp.stay_service.services;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
+import java.util.Optional;
+import java.util.Map;
+import java.util.HashSet;
+import java.util.List;
 import java.util.stream.Collectors;
 
-import com.travelapp.stay_service.exceptions.*;
+
+import com.travelapp.stay_service.exceptions.StayNotFoundException;
+import com.travelapp.stay_service.exceptions.InvalidDataException;
+import com.travelapp.stay_service.exceptions.RoomDetailNotFoundException;
+import com.travelapp.stay_service.exceptions.RestaurantNotFoundException;
+import com.travelapp.stay_service.exceptions.DuplicateRestaurantException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
@@ -39,19 +45,17 @@ public class StayDetailService {
         }
         stayDetail.setCreatedDate(LocalDate.now());
         stayDetail.setUpdatedDate(LocalDate.now());
-        StayDetail createdStay = null;
         try {
-            createdStay = stayDetailRepository.save(stayDetail);
+            return stayDetailRepository.save(stayDetail);
         } catch (DuplicateKeyException exception) {
             System.out.println("exception :: " + exception.getMessage());
             throw new DuplicateKeyException("A stay already exists at given address/same name and address");
         }
-        return createdStay;
     }
 
     public void deactivateStay(String id) throws StayNotFoundException {
         Optional<StayDetail> stayDetailOpt = stayDetailRepository.findById(id);
-        if(stayDetailOpt.isPresent()) {
+        if (stayDetailOpt.isPresent()) {
             StayDetail stayDetail = stayDetailOpt.get();
             stayDetail.setIsactive(false);
             stayDetail.setUpdatedDate(LocalDate.now());
@@ -63,7 +67,7 @@ public class StayDetailService {
 
     public void activateStay(String id) throws StayNotFoundException {
         Optional<StayDetail> stayDetailOpt = stayDetailRepository.findById(id);
-        if(stayDetailOpt.isPresent()) {
+        if (stayDetailOpt.isPresent()) {
             StayDetail stayDetail = stayDetailOpt.get();
             stayDetail.setUpdatedDate(LocalDate.now());
             stayDetail.setIsactive(true);
@@ -76,7 +80,7 @@ public class StayDetailService {
 
     public StayDetail getStayDetail(String id) throws StayNotFoundException {
         Optional<StayDetail> stayDetailOpt = stayDetailRepository.findById(id);
-        if(stayDetailOpt.isPresent()) {
+        if (stayDetailOpt.isPresent()) {
             return stayDetailOpt.get();
         } else {
             throw new StayNotFoundException("No stay found with given id :: " + id);
@@ -182,6 +186,10 @@ public class StayDetailService {
         } else {
             throw new StayNotFoundException("No stay found with given id :: " + stayId);
         }
+    }
+
+    public List<StayDetail> searchStays(String location) {
+        return stayDetailRepository.search(location);
     }
 
     private boolean verifyUniqueRestaurantNameInStay(StayDetail stayDetail, String name) {

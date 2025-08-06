@@ -1,9 +1,11 @@
 package com.travelapp.stay_service.controllers;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.travelapp.stay_service.exceptions.*;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
@@ -110,5 +112,11 @@ public class StayDetailController {
 			@RequestParam double price) throws StayNotFoundException, RoomDetailNotFoundException {
 		stayDetailService.updateRoomPrice(stayId, roomId, price);
 		return ResponseEntity.ok("Room price updated successfully");
+	}
+
+	@GetMapping("/location/search")
+	public ResponseEntity<List<StayDetail>> searchResultsInCityLocAndSubLoc(@RequestParam String search) {
+		List<StayDetail> stayDetailList = stayDetailService.searchStays(search);
+		return ResponseEntity.ok(stayDetailList);
 	}
 }

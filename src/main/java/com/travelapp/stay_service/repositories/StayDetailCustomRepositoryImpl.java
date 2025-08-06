@@ -8,16 +8,17 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
-import com.travelapp.stay_service.entities.RoomDetail;
 import com.travelapp.stay_service.entities.StayDetail;
 import com.travelapp.stay_service.enums.PropertyRatingEnum;
 import com.travelapp.stay_service.enums.PropertyTypeEnum;
@@ -45,19 +46,19 @@ public class StayDetailCustomRepositoryImpl implements StayDetailCustomRepositor
 			Pattern subLocPattern = Pattern.compile("^" + Pattern.quote(subLocation) + "$", Pattern.CASE_INSENSITIVE);
 			criteria.and(Constants.SUBLOCATION).regex(subLocPattern);
 		}
-		if (propertyType != null && PropertyTypeEnum.valueOf(propertyType.toUpperCase()) != null) {
-			criteria.and(Constants.PROPERTYTYPE).is(propertyType.toUpperCase());
+		if (propertyType != null) {
+            criteria.and(Constants.PROPERTYTYPE).is(PropertyTypeEnum.valueOf(propertyType.toUpperCase()).name());
+        }
+		if (propertyRating != null) {
+			criteria.and(Constants.PROPERTYRATING).is(PropertyRatingEnum.valueOf(propertyRating.toUpperCase()).name());
 		}
-		if (propertyRating != null && PropertyRatingEnum.valueOf(propertyRating.toUpperCase()) != null) {
-			criteria.and(Constants.PROPERTYRATING).is(propertyRating.toUpperCase());
-		}
-		if (userRating != null && UserRatingEnum.valueOf(userRating.toUpperCase()) != null) {
-			criteria.and(Constants.USERRATING).is(userRating.toUpperCase());
+		if (userRating != null) {
+			criteria.and(Constants.USERRATING).is(UserRatingEnum.valueOf(userRating.toUpperCase()).name());
 		}
 		Query query = new Query(criteria);
 		query.with(PageRequest.of(page, size));
 		List<StayDetail> stays = mongoTemplate.find(query, StayDetail.class);
-		Map<Object, Set<Object>> stayWithRooms =  stays.stream().collect(Collectors.groupingBy(a->a.getId(), Collectors.mapping(a->a.getRooms(), Collectors.toSet())));
+		Map<Object, Set<Object>> stayWithRooms =  stays.stream().collect(Collectors.groupingBy(StayDetail::getId, Collectors.mapping(StayDetail::getRooms, Collectors.toSet())));
 		System.out.println(stayWithRooms.size());
 		long count = mongoTemplate.count(Query.of(query).limit(-1).skip(-1), StayDetail.class);
 		return new PageImpl<>(stays, PageRequest.of(page, size), count);
@@ -81,8 +82,7 @@ public class StayDetailCustomRepositoryImpl implements StayDetailCustomRepositor
 				update.set(Constants.REST_START_TIME, LocalTime.parse((String) updatedFields.get(Constants.STARTTIME)));
 				updatedFields.remove(Constants.STARTTIME);
 			}
-			updatedFields.entrySet().stream()
-					.forEach(entry -> update.set(Constants.REST_SUB_DOC + entry.getKey(), entry.getValue()));
+			updatedFields.forEach((key, value) -> update.set(Constants.REST_SUB_DOC + key, value));
 			mongoTemplate.updateFirst(query, update, StayDetail.class);
 			Query fetchQuery = new Query(Criteria.where(Constants.STAYID).is(stayId));
 			return mongoTemplate.findOne(fetchQuery, StayDetail.class);
@@ -100,7 +100,7 @@ public class StayDetailCustomRepositoryImpl implements StayDetailCustomRepositor
 			mongoTemplate.updateFirst(query, update, StayDetail.class);
 			Query fetchQuery = new Query(Criteria.where(Constants.STAYID).is(stayId));
 			StayDetail stayDetail = mongoTemplate.findOne(fetchQuery, StayDetail.class);
-			if (stayDetail.getRestaurants().isEmpty() || stayDetail.getRestaurants() == null) {
+			if (stayDetail != null && (stayDetail.getRestaurants().isEmpty() || stayDetail.getRestaurants() == null)) {
 				Update stayUpdate = new Update().set(Constants.HAS_RESTAURANT, false);
 				update.set(Constants.UPDATED_DATE, LocalDate.now());
 				mongoTemplate.updateFirst(fetchQuery, stayUpdate, StayDetail.class);
@@ -126,21 +126,24 @@ public class StayDetailCustomRepositoryImpl implements StayDetailCustomRepositor
 	@Override
 	public StayDetail updateStay(String stayId, Map<String, Object> updatedFields) throws StayNotFoundException {
 		Query query = new Query(Criteria.where(Constants.STAYID).is(stayId));
-		Update update = new Update().set(Constants.UPDATED_DATE, LocalDate.now());
-		if (updatedFields.containsKey(Constants.STAY_FACILITIES)) {
-			update.addToSet(Constants.STAY_FACILITIES).each(updatedFields.get(Constants.STAY_FACILITIES));
-			updatedFields.remove(Constants.STAY_FACILITIES);
+		if(mongoTemplate.exists(query,StayDetail.class)) {
+			Update update = new Update().set(Constants.UPDATED_DATE, LocalDate.now());
+			if (updatedFields.containsKey(Constants.STAY_FACILITIES)) {
+				update.addToSet(Constants.STAY_FACILITIES).each(updatedFields.get(Constants.STAY_FACILITIES));
+				updatedFields.remove(Constants.STAY_FACILITIES);
+			}
+			if (updatedFields.containsKey(Constants.STAY_RULES)) {
+				update.addToSet(Constants.STAY_RULES).each(updatedFields.get(Constants.STAY_RULES));
+				updatedFields.remove(Constants.STAY_RULES);
+			}
+			updatedFields.entrySet().stream().filter(entry -> !Constants.STAY_IMMUTABLE_FIELDS.contains(entry.getKey()))
+					.forEach(entry -> update.set(entry.getKey(), entry.getValue()));
+			mongoTemplate.updateFirst(query, update, StayDetail.class);
+			Query fetchQuery = new Query(Criteria.where(Constants.STAYID).is(stayId));
+			return mongoTemplate.findOne(fetchQuery, StayDetail.class);
+		} else {
+			throw new StayNotFoundException("Stay not fount with given id :: "+stayId);
 		}
-		if (updatedFields.containsKey(Constants.STAY_RULES)) {
-			update.addToSet(Constants.STAY_RULES).each(updatedFields.get(Constants.STAY_RULES));
-			updatedFields.remove(Constants.STAY_RULES);
-		}
-		updatedFields.entrySet().stream().filter(entry -> !Constants.STAY_IMMUTABLE_FIELDS.contains(entry.getKey()))
-				.forEach(entry -> update.set(entry.getKey(), entry.getValue()));
-		mongoTemplate.updateFirst(query, update, StayDetail.class);
-		Query fetchQuery = new Query(Criteria.where(Constants.STAYID).is(stayId));
-		StayDetail stayDetail = mongoTemplate.findOne(fetchQuery, StayDetail.class);
-		return stayDetail;
 	}
 
 	@Override
@@ -153,6 +156,23 @@ public class StayDetailCustomRepositoryImpl implements StayDetailCustomRepositor
 			throw new RoomDetailNotFoundException(
 					"Room with given id doesn't exists :: " + roomId + " at stay ::" + stayId);
 		}
+	}
+
+	@Override
+	public List<StayDetail> search(String  textToSearch) {
+		Document search = new Document("$search", new Document("compound",
+				new Document("should", List.of(
+						createAutocompleteStage("address.city", textToSearch),
+						createAutocompleteStage("address.location", textToSearch),
+						createAutocompleteStage("address.subLocation", textToSearch)
+				))
+		));
+		Aggregation aggregation = Aggregation.newAggregation((context) -> search);
+		return mongoTemplate.aggregate(aggregation, "StayDetail", StayDetail.class).getMappedResults();
+	}
+
+	private Document createAutocompleteStage(String path, String query) {
+		return new Document("autocomplete", new Document("query", query).append("path", path));
 	}
 
 }
