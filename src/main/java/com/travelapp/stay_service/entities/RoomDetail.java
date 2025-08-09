@@ -3,7 +3,10 @@ package com.travelapp.stay_service.entities;
 import java.util.Objects;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.mongodb.lang.NonNull;
 import com.travelapp.stay_service.enums.RoomCategoryEnum;
 import com.travelapp.stay_service.enums.RoomViewEnum;
 
@@ -17,8 +20,13 @@ public class RoomDetail {
 	private Set<String> roomFacilities;
 	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private RoomCategoryEnum roomCategory;
+    @NonNull
+    private Integer numberOfRooms = 1 ;
 
-	public int getRoomId() {
+    public RoomDetail() {
+    }
+
+    public int getRoomId() {
 		return roomId;
 	}
 
@@ -82,7 +90,16 @@ public class RoomDetail {
 		this.roomCategory = roomCategory;
 	}
 
-	@Override
+    @NonNull
+    public Integer getNumberOfRooms() {
+        return numberOfRooms;
+    }
+
+    public void setNumberOfRooms(@NonNull Integer numberOfRooms) {
+        this.numberOfRooms = numberOfRooms;
+    }
+
+    @Override
 	public int hashCode() {
 		return Objects.hash(name, roomId);
 	}

@@ -1,11 +1,12 @@
 package com.travelapp.stay_service.controllers;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.travelapp.stay_service.entities.StayRoomMappingDto;
 import com.travelapp.stay_service.exceptions.*;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
@@ -119,4 +120,16 @@ public class StayDetailController {
 		List<StayDetail> stayDetailList = stayDetailService.searchStays(search);
 		return ResponseEntity.ok(stayDetailList);
 	}
+
+    @GetMapping("/all/city")
+    public ResponseEntity<Map<String,List<StayRoomMappingDto>>> getStaysAndRoomsInfoByCity() {
+        Map<String,List<StayRoomMappingDto>> stayAndRoomMap = stayDetailService.getStaysAndRoomsInfoByCity();
+        return ResponseEntity.ok(stayAndRoomMap);
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<StayDetail>> getAllStays() {
+         List<StayDetail> stayDetailsList = stayDetailService.getAllStayDetails();
+        return ResponseEntity.ok(stayDetailsList);
+    }
 }

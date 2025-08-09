@@ -1,14 +1,11 @@
 package com.travelapp.stay_service.services;
 
 import java.time.LocalDate;
-import java.util.Set;
-import java.util.Optional;
-import java.util.Map;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
+import com.travelapp.stay_service.entities.*;
 import com.travelapp.stay_service.exceptions.StayNotFoundException;
 import com.travelapp.stay_service.exceptions.InvalidDataException;
 import com.travelapp.stay_service.exceptions.RoomDetailNotFoundException;
@@ -19,8 +16,6 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import com.travelapp.stay_service.entities.Restaurant;
-import com.travelapp.stay_service.entities.StayDetail;
 import com.travelapp.stay_service.enums.PropertyTypeEnum;
 import com.travelapp.stay_service.repositories.StayDetailRepository;
 
@@ -198,6 +193,22 @@ public class StayDetailService {
         isExists = restaurants.stream().anyMatch(rest -> rest.getName().equalsIgnoreCase(name));
         System.out.println(isExists);
         return isExists;
+    }
+
+    public Map<String, List<StayRoomMappingDto>> getStaysAndRoomsInfoByCity() {
+        return stayDetailRepository.findAll().stream()
+                .collect(Collectors.groupingBy(stay -> stay.getAddress().getCity(),
+                        Collectors.mapping(stay -> {
+                            Set<RoomCount> roomCounts = stay.getRooms().stream()
+                                    .map(room -> new RoomCount(room.getRoomId(), room.getNumberOfRooms()))
+                                    .collect(Collectors.toSet());
+                            return new StayRoomMappingDto(stay.getId(), roomCounts);
+                        }, Collectors.toList())
+                ));
+    }
+
+    public List<StayDetail> getAllStayDetails() {
+        return stayDetailRepository.findAll();
     }
 
 }
