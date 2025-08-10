@@ -2,8 +2,8 @@ package com.travelapp.stay_service.exceptions;
 
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -41,4 +41,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleInvalidDataException(InvalidDataException invalidDataException) {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(invalidDataException.getMessage());
     }
+
+    @ExceptionHandler(exception = MethodArgumentNotValidException.class)
+    public ResponseEntity<String> handleInvalid() {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid data");
+    }
+
 }

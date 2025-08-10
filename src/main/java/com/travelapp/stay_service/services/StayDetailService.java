@@ -25,10 +25,10 @@ public class StayDetailService {
     StayDetailRepository stayDetailRepository;
 
     public StayDetail createStayDetail(StayDetail stayDetail) throws DuplicateKeyException {
-        if (stayDetail.getPropertyType().name().toUpperCase().equals(PropertyTypeEnum.HOMESTAY.name())) {
+        /*if (stayDetail.getPropertyType().name().toUpperCase().equals(PropertyTypeEnum.HOMESTAY.name())) {
             stayDetail.setApproved(false);
             stayDetail.setIsactive(false);
-        }
+        }*/
         if (stayDetail.getRestaurants() != null && !stayDetail.getRestaurants().isEmpty()) {
             stayDetail.setHasRestaurant(true);
             Set<Restaurant> restaurants = stayDetail.getRestaurants().stream().map(rest -> {
@@ -44,7 +44,7 @@ public class StayDetailService {
             return stayDetailRepository.save(stayDetail);
         } catch (DuplicateKeyException exception) {
             System.out.println("exception :: " + exception.getMessage());
-            throw new DuplicateKeyException("A stay already exists at given address/same name and address");
+            throw new DuplicateKeyException("A stay already exists at given address");
         }
     }
 

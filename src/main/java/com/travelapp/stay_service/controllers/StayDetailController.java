@@ -1,12 +1,12 @@
 package com.travelapp.stay_service.controllers;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.travelapp.stay_service.entities.StayRoomMappingDto;
 import com.travelapp.stay_service.exceptions.*;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
@@ -31,7 +31,7 @@ public class StayDetailController {
 	StayDetailService stayDetailService;
 
 	@PostMapping
-	public ResponseEntity<StayDetail> createStay(@RequestBody StayDetail stayDetail) throws DuplicateKeyException {
+	public ResponseEntity<StayDetail> createStay(@Valid  @RequestBody StayDetail stayDetail) throws DuplicateKeyException {
 		StayDetail createdStay = stayDetailService.createStayDetail(stayDetail);
 		return ResponseEntity.ok(createdStay);
 	}
