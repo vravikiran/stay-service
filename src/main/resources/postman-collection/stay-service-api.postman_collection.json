@@ -1,0 +1,1478 @@
+{
+	"info": {
+		"_postman_id": "568fde9a-6d73-47c4-84d0-974c5fc19b38",
+		"name": "stay-service-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32863488"
+	},
+	"item": [
+		{
+			"name": "search stays",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/stay/search?city=HyderabaD&propertyType=HOMESTAY&location=GACHIBOWLI&subLocation=NanakRamGuda",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stay",
+						"search"
+					],
+					"query": [
+						{
+							"key": "city",
+							"value": "HyderabaD"
+						},
+						{
+							"key": "propertyType",
+							"value": "HOMESTAY"
+						},
+						{
+							"key": "location",
+							"value": "GACHIBOWLI"
+						},
+						{
+							"key": "subLocation",
+							"value": "NanakRamGuda"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "search stays",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/stay/search?city=HyderabaD&propertyType=HOMESTAY&location=GACHIBOWLI&subLocation=NanakRamGuda",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"search"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "HyderabaD"
+								},
+								{
+									"key": "propertyType",
+									"value": "HOMESTAY"
+								},
+								{
+									"key": "location",
+									"value": "GACHIBOWLI"
+								},
+								{
+									"key": "subLocation",
+									"value": "NanakRamGuda"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 03:28:18 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"content\": [\n        {\n            \"id\": \"1\",\n            \"name\": \"RAVI HOME STAY\",\n            \"rooms\": [\n                {\n                    \"roomId\": 1,\n                    \"name\": \"EXECUTIVE ROOM\",\n                    \"roomView\": \"SEA\",\n                    \"size\": 48,\n                    \"price\": 2300,\n                    \"roomImdUri\": null,\n                    \"roomFacilities\": [\n                        \"AC\",\n                        \"GEYSER\",\n                        \"IRON ROD\",\n                        \"WORK DESK\"\n                    ]\n                }\n            ],\n            \"hasRestaurant\": true,\n            \"hasGym\": false,\n            \"hasSwimPool\": false,\n            \"address\": {\n                \"location\": \"Gachibowli\",\n                \"subLocation\": \"NanakramGuda\",\n                \"city\": \"Hyderabad\",\n                \"state\": \"TELANGANA\",\n                \"country\": \"INDIA\",\n                \"zipCode\": 500072,\n                \"addressLine1\": \"OPP ICICI BANK\",\n                \"addressLine2\": \"MARIOTT\"\n            },\n            \"propertyType\": \"HOMESTAY\",\n            \"propertyRating\": \"FOURSTAR\",\n            \"userRating\": \"FOURSTAR\",\n            \"restaurants\": [\n                {\n                    \"restId\": 3,\n                    \"name\": \"BAR\",\n                    \"cuisines\": [\n                        \"VEG\",\n                        \"NONVEG\",\n                        \"CONTINENTAL\"\n                    ],\n                    \"restaurantType\": \"PUB\",\n                    \"startTime\": \"11:00:00\",\n                    \"endTime\": \"22:00:00\"\n                },\n                {\n                    \"restId\": 2,\n                    \"name\": \"RESTAURANT\",\n                    \"cuisines\": [\n                        \"VEG\",\n                        \"NONVEG\"\n                    ],\n                    \"restaurantType\": \"RESTUARANT\",\n                    \"startTime\": \"09:00:00\",\n                    \"endTime\": \"21:00:00\"\n                },\n                {\n                    \"restId\": 4,\n                    \"name\": \"BAr1\",\n                    \"cuisines\": [\n                        \"VEG\",\n                        \"NONVEG\"\n                    ],\n                    \"restaurantType\": \"RESTUARANT\",\n                    \"startTime\": \"09:00:00\",\n                    \"endTime\": \"21:00:00\"\n                },\n                {\n                    \"restId\": 5,\n                    \"name\": \"BAr3\",\n                    \"cuisines\": [\n                        \"VEG\",\n                        \"NONVEG\"\n                    ],\n                    \"restaurantType\": \"RESTUARANT\",\n                    \"startTime\": \"14:30:00\",\n                    \"endTime\": \"02:30:00\"\n                },\n                {\n                    \"restId\": 6,\n                    \"name\": \"HAVELI RESTRO\",\n                    \"cuisines\": [\n                        \"VEG\",\n                        \"NONVEG\"\n                    ],\n                    \"restaurantType\": \"RESTUARANT\",\n                    \"startTime\": \"09:00:00\",\n                    \"endTime\": \"21:00:00\"\n                }\n            ],\n            \"isactive\": true,\n            \"facilities\": [\n                \"Restaurants\",\n                \"transfer\"\n            ],\n            \"rules\": [\n                \"Unmarried couple not allowed\"\n            ],\n            \"approved\": true\n        }\n    ],\n    \"page\": {\n        \"size\": 5,\n        \"number\": 0,\n        \"totalElements\": 1,\n        \"totalPages\": 1\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "add restuarant at stay",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"restId\":6,\n    \"name\":\"HAVELI RESTRO\",\n    \"cuisines\":[\"VEG\",\"NONVEG\"],\n    \"restaurantType\":\"RESTUARANT\",\n    \"startTime\":\"09:00\",\n    \"endTime\":\"21:00\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/stay/add/restaurant?stayId=1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stay",
+						"add",
+						"restaurant"
+					],
+					"query": [
+						{
+							"key": "stayId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "add restuarant at stay",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"restId\":6,\n    \"name\":\"HAVELI RESTRO\",\n    \"cuisines\":[\"VEG\",\"NONVEG\"],\n    \"restaurantType\":\"RESTUARANT\",\n    \"startTime\":\"09:00\",\n    \"endTime\":\"21:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/stay/add/restaurant?stayId=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"add",
+								"restaurant"
+							],
+							"query": [
+								{
+									"key": "stayId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 03:28:03 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"1\",\n    \"name\": \"RAVI HOME STAY\",\n    \"rooms\": [\n        {\n            \"roomId\": 1,\n            \"name\": \"EXECUTIVE ROOM\",\n            \"roomView\": \"SEA\",\n            \"size\": 48,\n            \"price\": 2300,\n            \"roomImdUri\": null,\n            \"roomFacilities\": [\n                \"AC\",\n                \"GEYSER\",\n                \"IRON ROD\",\n                \"WORK DESK\"\n            ]\n        }\n    ],\n    \"hasRestaurant\": true,\n    \"hasGym\": false,\n    \"hasSwimPool\": false,\n    \"address\": {\n        \"location\": \"Gachibowli\",\n        \"subLocation\": \"NanakramGuda\",\n        \"city\": \"Hyderabad\",\n        \"state\": \"TELANGANA\",\n        \"country\": \"INDIA\",\n        \"zipCode\": 500072,\n        \"addressLine1\": \"OPP ICICI BANK\",\n        \"addressLine2\": \"MARIOTT\"\n    },\n    \"propertyType\": \"HOMESTAY\",\n    \"propertyRating\": \"FOURSTAR\",\n    \"userRating\": \"FOURSTAR\",\n    \"restaurants\": [\n        {\n            \"restId\": 3,\n            \"name\": \"BAR\",\n            \"cuisines\": [\n                \"VEG\",\n                \"NONVEG\",\n                \"CONTINENTAL\"\n            ],\n            \"restaurantType\": \"PUB\",\n            \"startTime\": \"11:00:00\",\n            \"endTime\": \"22:00:00\"\n        },\n        {\n            \"restId\": 2,\n            \"name\": \"RESTAURANT\",\n            \"cuisines\": [\n                \"VEG\",\n                \"NONVEG\"\n            ],\n            \"restaurantType\": \"RESTUARANT\",\n            \"startTime\": \"09:00:00\",\n            \"endTime\": \"21:00:00\"\n        },\n        {\n            \"restId\": 4,\n            \"name\": \"BAr1\",\n            \"cuisines\": [\n                \"VEG\",\n                \"NONVEG\"\n            ],\n            \"restaurantType\": \"RESTUARANT\",\n            \"startTime\": \"09:00:00\",\n            \"endTime\": \"21:00:00\"\n        },\n        {\n            \"restId\": 5,\n            \"name\": \"BAr3\",\n            \"cuisines\": [\n                \"VEG\",\n                \"NONVEG\"\n            ],\n            \"restaurantType\": \"RESTUARANT\",\n            \"startTime\": \"14:30:00\",\n            \"endTime\": \"02:30:00\"\n        },\n        {\n            \"restId\": 6,\n            \"name\": \"HAVELI RESTRO\",\n            \"cuisines\": [\n                \"VEG\",\n                \"NONVEG\"\n            ],\n            \"restaurantType\": \"RESTUARANT\",\n            \"startTime\": \"09:00:00\",\n            \"endTime\": \"21:00:00\"\n        }\n    ],\n    \"isactive\": true,\n    \"facilities\": [\n        \"Restaurants\",\n        \"transfer\"\n    ],\n    \"rules\": [\n        \"Unmarried couple not allowed\"\n    ],\n    \"approved\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Deactivate Stay",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"MARRIOT GACHIBOWLI\",\n    \"propertyType\": \"HOTEL\",\n    \"rooms\": [\n        {\n            \"roomId\": \"1\",\n            \"roomView\": \"CITY\",\n            \"size\": 220,\n            \"price\": 5000,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Bathtub\",\n                \"Iron board\",\n                \"AC\"\n            ],\n            \"roomCategory\": \"EXECUTIVE\"\n        },\n        {\n            \"roomId\": \"2\",\n            \"roomView\": \"POOL\",\n            \"size\": 260,\n            \"price\": 5400,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Bathtub\",\n                \"Iron board\",\n                \"AC\",\n                \"TV\"\n            ],\n            \"roomCategory\": \"BUSINESS\"\n        }\n    ],\n    \"address\": {\n        \"location\": \"GACHIBOWLI\",\n        \"subLocation\": \"NANAKRAMGUDA\",\n        \"city\": \"Hyderabad\",\n        \"state\": \"TELANGANA\",\n        \"country\": \"INDIA\",\n        \"zipCode\": 500019,\n        \"addressLine1\": \"PLOT NO: 98\",\n        \"addressLine2\": \"Continental Hospital Road\"\n    },\n    \"stayImagesUri\": \"dummy stage image url\",\n    \"propertyRating\": \"FIVESTAR\",\n    \"userRating\": \"FOURSTAR\",\n    \"hasRestaurant\": true,\n    \"restaurants\": [\n        {\n            \"restId\": 1,\n            \"name\": \"TATVA VEG RESTAURANT\",\n            \"cuisines\": [\n                \"VEG\"\n            ],\n            \"restaurantType\": \"RESTUARANT\",\n            \"startTime\": \"08:00\",\n            \"endTime\": \"22:00\"\n        }\n    ],\n    \"facilities\": [\n        \"GYM\",\n        \"RESTAURANT\"\n    ],\n    \"rules\": [\n        \"Unmarried couples not allowed\",\n        \"Smoking and Alcohol not permitted in premises\"\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/stay/deactivate?id=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stay",
+						"deactivate"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Deactivate Stay",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"MARRIOT GACHIBOWLI\",\n    \"propertyType\": \"HOTEL\",\n    \"rooms\": [\n        {\n            \"roomId\": \"1\",\n            \"roomView\": \"CITY\",\n            \"size\": 220,\n            \"price\": 5000,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Bathtub\",\n                \"Iron board\",\n                \"AC\"\n            ],\n            \"roomCategory\": \"EXECUTIVE\"\n        },\n        {\n            \"roomId\": \"2\",\n            \"roomView\": \"POOL\",\n            \"size\": 260,\n            \"price\": 5400,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Bathtub\",\n                \"Iron board\",\n                \"AC\",\n                \"TV\"\n            ],\n            \"roomCategory\": \"BUSINESS\"\n        }\n    ],\n    \"address\": {\n        \"location\": \"GACHIBOWLI\",\n        \"subLocation\": \"NANAKRAMGUDA\",\n        \"city\": \"Hyderabad\",\n        \"state\": \"TELANGANA\",\n        \"country\": \"INDIA\",\n        \"zipCode\": 500019,\n        \"addressLine1\": \"PLOT NO: 98\",\n        \"addressLine2\": \"Continental Hospital Road\"\n    },\n    \"stayImagesUri\": \"dummy stage image url\",\n    \"propertyRating\": \"FIVESTAR\",\n    \"userRating\": \"FOURSTAR\",\n    \"hasRestaurant\": true,\n    \"restaurants\": [\n        {\n            \"restId\": 1,\n            \"name\": \"TATVA VEG RESTAURANT\",\n            \"cuisines\": [\n                \"VEG\"\n            ],\n            \"restaurantType\": \"RESTUARANT\",\n            \"startTime\": \"08:00\",\n            \"endTime\": \"22:00\"\n        }\n    ],\n    \"facilities\": [\n        \"GYM\",\n        \"RESTAURANT\"\n    ],\n    \"rules\": [\n        \"Unmarried couples not allowed\",\n        \"Smoking and Alcohol not permitted in premises\"\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/stay/deactivate?id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"deactivate"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "49"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 03:23:36 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Stay operations suspended/terminated successfully"
+				}
+			]
+		},
+		{
+			"name": "Activate Stay",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/stay/activate?id=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stay",
+						"activate"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Activate Stay",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stay/activate?id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"activate"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "29"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 03:25:39 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Stay operational for business"
+				}
+			]
+		},
+		{
+			"name": "Fetch Stay Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/stay/detail/id?id=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stay",
+						"detail",
+						"id"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Fetch Stay Details",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stay/detail/id?id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"detail",
+								"id"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 03:29:16 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"2\",\n    \"name\": \"MARRIOT GACHIBOWLI\",\n    \"rooms\": [\n        {\n            \"roomId\": 1,\n            \"name\": null,\n            \"roomView\": \"CITY\",\n            \"size\": 220,\n            \"price\": 5000,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Iron board\",\n                \"AC\",\n                \"Bathtub\"\n            ],\n            \"roomCategory\": \"EXECUTIVE\"\n        },\n        {\n            \"roomId\": 2,\n            \"name\": null,\n            \"roomView\": \"POOL\",\n            \"size\": 260,\n            \"price\": 5400,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Iron board\",\n                \"AC\",\n                \"TV\",\n                \"Bathtub\"\n            ],\n            \"roomCategory\": \"BUSINESS\"\n        }\n    ],\n    \"hasRestaurant\": true,\n    \"hasGym\": false,\n    \"hasSwimPool\": false,\n    \"address\": {\n        \"location\": \"GACHIBOWLI\",\n        \"subLocation\": \"NANAKRAMGUDA\",\n        \"city\": \"Hyderabad\",\n        \"state\": \"TELANGANA\",\n        \"country\": \"INDIA\",\n        \"zipCode\": 500019,\n        \"addressLine1\": \"PLOT NO: 98\",\n        \"addressLine2\": \"Continental Hospital Road\"\n    },\n    \"stayImagesUri\": \"dummy stage image url\",\n    \"propertyType\": \"HOTEL\",\n    \"propertyRating\": \"FIVESTAR\",\n    \"userRating\": \"FOURSTAR\",\n    \"restaurants\": [\n        {\n            \"restId\": 1,\n            \"name\": \"TATVA VEG RESTAURANT\",\n            \"cuisines\": [\n                \"VEG\"\n            ],\n            \"restaurantType\": \"RESTUARANT\",\n            \"startTime\": \"08:00:00\",\n            \"endTime\": \"22:00:00\"\n        }\n    ],\n    \"isactive\": true,\n    \"facilities\": [\n        \"RESTAURANT\",\n        \"GYM\"\n    ],\n    \"rules\": [\n        \"Unmarried couples not allowed\",\n        \"Smoking and Alcohol not permitted in premises\"\n    ],\n    \"approved\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Approve Home Stay",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/stay/approve?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stay",
+						"approve"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "approving non home stay",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stay/approve?id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"approve"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+					"code": 422,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "15"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 04:17:10 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Not a home stay"
+				},
+				{
+					"name": "Valid Home stay",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stay/approve?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"approve"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "31"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 04:18:19 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Home stay approved successfully"
+				}
+			]
+		},
+		{
+			"name": "Update Restaurant Details at a Stay",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cuisines\":[\"NONVEG\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/stay/update/restaurant?restId=1&stayId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stay",
+						"update",
+						"restaurant"
+					],
+					"query": [
+						{
+							"key": "restId",
+							"value": "1"
+						},
+						{
+							"key": "stayId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Valid details",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cuisines\":[\"NONVEG\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stay/update/restaurant?restId=1&stayId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"update",
+								"restaurant"
+							],
+							"query": [
+								{
+									"key": "restId",
+									"value": "1"
+								},
+								{
+									"key": "stayId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 04:23:12 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"2\",\n    \"name\": \"MARRIOT GACHIBOWLI\",\n    \"rooms\": [\n        {\n            \"roomId\": 1,\n            \"name\": null,\n            \"roomView\": \"CITY\",\n            \"size\": 220,\n            \"price\": 5000,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Iron board\",\n                \"AC\",\n                \"Bathtub\"\n            ],\n            \"roomCategory\": \"EXECUTIVE\"\n        },\n        {\n            \"roomId\": 2,\n            \"name\": null,\n            \"roomView\": \"POOL\",\n            \"size\": 260,\n            \"price\": 5400,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Iron board\",\n                \"AC\",\n                \"TV\",\n                \"Bathtub\"\n            ],\n            \"roomCategory\": \"BUSINESS\"\n        }\n    ],\n    \"hasRestaurant\": true,\n    \"hasGym\": false,\n    \"hasSwimPool\": false,\n    \"address\": {\n        \"location\": \"GACHIBOWLI\",\n        \"subLocation\": \"NANAKRAMGUDA\",\n        \"city\": \"Hyderabad\",\n        \"state\": \"TELANGANA\",\n        \"country\": \"INDIA\",\n        \"zipCode\": 500019,\n        \"addressLine1\": \"PLOT NO: 98\",\n        \"addressLine2\": \"Continental Hospital Road\"\n    },\n    \"stayImagesUri\": \"dummy stage image url\",\n    \"propertyType\": \"HOTEL\",\n    \"propertyRating\": \"FIVESTAR\",\n    \"userRating\": \"FOURSTAR\",\n    \"restaurants\": [\n        {\n            \"restId\": 1,\n            \"name\": \"TATVA VEG RESTAURANT\",\n            \"cuisines\": [\n                \"VEG\",\n                \"NONVEG\"\n            ],\n            \"restaurantType\": \"RESTUARANT\",\n            \"startTime\": \"08:00:00\",\n            \"endTime\": \"22:00:00\"\n        }\n    ],\n    \"isactive\": true,\n    \"facilities\": [\n        \"RESTAURANT\",\n        \"GYM\"\n    ],\n    \"rules\": [\n        \"Unmarried couples not allowed\",\n        \"Smoking and Alcohol not permitted in premises\"\n    ],\n    \"approved\": true\n}"
+				},
+				{
+					"name": "Invalid Details",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cuisines\":[\"NONVEG\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stay/update/restaurant?restId=3&stayId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"update",
+								"restaurant"
+							],
+							"query": [
+								{
+									"key": "restId",
+									"value": "3"
+								},
+								{
+									"key": "stayId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 04:23:49 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Restaurant with given id doesn't exists in the stay :; 3"
+				}
+			]
+		},
+		{
+			"name": "Remove restaurant from stay",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"cuisines\":[\"NONVEG\"]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/stay/remove/restaurant?stayId=2&restId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stay",
+						"remove",
+						"restaurant"
+					],
+					"query": [
+						{
+							"key": "stayId",
+							"value": "2"
+						},
+						{
+							"key": "restId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Remove restaurant from stay",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cuisines\":[\"NONVEG\"]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/stay/remove/restaurant?stayId=2&restId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"remove",
+								"restaurant"
+							],
+							"query": [
+								{
+									"key": "stayId",
+									"value": "2"
+								},
+								{
+									"key": "restId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "41"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 04:35:31 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Restaurant removed successfully from stay"
+				},
+				{
+					"name": "invalid details",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cuisines\":[\"NONVEG\"]\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/stay/remove/restaurant?stayId=2&restId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"remove",
+								"restaurant"
+							],
+							"query": [
+								{
+									"key": "stayId",
+									"value": "2"
+								},
+								{
+									"key": "restId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "56"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 04:36:07 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Restaurant with given id doesn't exists in the stay :: 2"
+				}
+			]
+		},
+		{
+			"name": "Update Room facilities",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n[\"Room heater\"]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/stay/room/facilities?stayId=2&roomId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stay",
+						"room",
+						"facilities"
+					],
+					"query": [
+						{
+							"key": "stayId",
+							"value": "2"
+						},
+						{
+							"key": "roomId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update Room facilities",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n[\"Room heater\"]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stay/room/facilities?stayId=2&roomId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"room",
+								"facilities"
+							],
+							"query": [
+								{
+									"key": "stayId",
+									"value": "2"
+								},
+								{
+									"key": "roomId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "39"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 04:40:14 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Room facilities are updated sucessfully"
+				},
+				{
+					"name": "Invalid Details",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n[\"Room heater\"]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stay/room/facilities?stayId=2&roomId=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"room",
+								"facilities"
+							],
+							"query": [
+								{
+									"key": "stayId",
+									"value": "2"
+								},
+								{
+									"key": "roomId",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "50"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 04:40:46 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Room with given id doesn't exists :: 3 at stay ::2"
+				}
+			]
+		},
+		{
+			"name": "Update stay details",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userRating\":\"ONESTAR\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/stay/update?stayId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stay",
+						"update"
+					],
+					"query": [
+						{
+							"key": "stayId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Update stay details",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userRating\":\"ONESTAR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stay/update?stayId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"update"
+							],
+							"query": [
+								{
+									"key": "stayId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 04:42:43 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"2\",\n    \"name\": \"MARRIOT GACHIBOWLI\",\n    \"rooms\": [\n        {\n            \"roomId\": 1,\n            \"name\": null,\n            \"roomView\": \"CITY\",\n            \"size\": 220,\n            \"price\": 5000,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Iron board\",\n                \"AC\",\n                \"Bathtub\",\n                \"Room heater\"\n            ],\n            \"roomCategory\": \"EXECUTIVE\"\n        },\n        {\n            \"roomId\": 2,\n            \"name\": null,\n            \"roomView\": \"POOL\",\n            \"size\": 260,\n            \"price\": 5400,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Iron board\",\n                \"AC\",\n                \"TV\",\n                \"Bathtub\"\n            ],\n            \"roomCategory\": \"BUSINESS\"\n        }\n    ],\n    \"hasRestaurant\": false,\n    \"hasGym\": false,\n    \"hasSwimPool\": false,\n    \"address\": {\n        \"location\": \"GACHIBOWLI\",\n        \"subLocation\": \"NANAKRAMGUDA\",\n        \"city\": \"Hyderabad\",\n        \"state\": \"TELANGANA\",\n        \"country\": \"INDIA\",\n        \"zipCode\": 500019,\n        \"addressLine1\": \"PLOT NO: 98\",\n        \"addressLine2\": \"Continental Hospital Road\"\n    },\n    \"stayImagesUri\": \"dummy stage image url\",\n    \"propertyType\": \"HOTEL\",\n    \"propertyRating\": \"FIVESTAR\",\n    \"userRating\": \"ONESTAR\",\n    \"restaurants\": [],\n    \"isactive\": true,\n    \"facilities\": [\n        \"RESTAURANT\",\n        \"GYM\"\n    ],\n    \"rules\": [\n        \"Unmarried couples not allowed\",\n        \"Smoking and Alcohol not permitted in premises\"\n    ],\n    \"approved\": true\n}"
+				},
+				{
+					"name": "Invalid stay Id",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userRating\":\"ONESTAR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/stay/update?stayId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"update"
+							],
+							"query": [
+								{
+									"key": "stayId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "32"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 04:43:08 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "No stay found with given id :: 4"
+				}
+			]
+		},
+		{
+			"name": "Room price update in a stay",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/stay/room/price/update?stayId=2&roomId=1&price=6000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"stay",
+						"room",
+						"price",
+						"update"
+					],
+					"query": [
+						{
+							"key": "stayId",
+							"value": "2"
+						},
+						{
+							"key": "roomId",
+							"value": "1"
+						},
+						{
+							"key": "price",
+							"value": "6000"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Invalid details of a stay",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stay/room/price/update?stayId=2&roomId=5&price=6000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"room",
+								"price",
+								"update"
+							],
+							"query": [
+								{
+									"key": "stayId",
+									"value": "2"
+								},
+								{
+									"key": "roomId",
+									"value": "5"
+								},
+								{
+									"key": "price",
+									"value": "6000"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "50"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 04:44:55 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "Room with given id doesn't exists :: 5 at stay ::2"
+				},
+				{
+					"name": "No stay with given Id",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/stay/room/price/update?stayId=3&roomId=5&price=6000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"stay",
+								"room",
+								"price",
+								"update"
+							],
+							"query": [
+								{
+									"key": "stayId",
+									"value": "3"
+								},
+								{
+									"key": "roomId",
+									"value": "5"
+								},
+								{
+									"key": "price",
+									"value": "6000"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "32"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 02 Aug 2025 04:45:20 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "No stay found with given id :: 3"
+				}
+			]
+		},
+		{
+			"name": "create stay",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"MARRIOT GACHIBOWLI\",\n    \"propertyType\": \"HOTEL\",\n    \"rooms\": [\n        {\n            \"roomId\": \"1\",\n            \"roomView\": \"CITY\",\n            \"size\": 220,\n            \"price\": 5000,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Bathtub\",\n                \"Iron board\",\n                \"AC\"\n            ],\n            \"roomCategory\": \"EXECUTIVE\"\n        },\n        {\n            \"roomId\": \"2\",\n            \"roomView\": \"POOL\",\n            \"size\": 260,\n            \"price\": 5400,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Bathtub\",\n                \"Iron board\",\n                \"AC\",\n                \"TV\"\n            ],\n            \"roomCategory\": \"BUSINESS\"\n        }\n    ],\n    \"address\": {\n        \"location\": \"GACHIBOWLI\",\n        \"subLocation\": \"NANAKRAMGUDA\",\n        \"city\": \"Hyderabad\",\n        \"state\": \"TELANGANA\",\n        \"country\": \"INDIA\",\n        \"zipCode\": 500019,\n        \"addressLine1\": \"PLOT NO: 107\",\n        \"addressLine2\": \"Continental Hospital Road\"\n    },\n    \"stayImagesUri\": \"dummy stage image url\",\n    \"propertyRating\": \"FIVESTAR\",\n    \"userRating\": \"FOURSTAR\",\n    \"hasRestaurant\": true,\n    \"restaurants\": [\n        {\n            \"restId\": 1,\n            \"name\": \"TATVA VEG RESTAURANT\",\n            \"cuisines\": [\n                \"VEG\"\n            ],\n            \"restaurantType\": \"RESTUARANT\",\n            \"startTime\": \"08:00\",\n            \"endTime\": \"22:00\"\n        }\n    ],\n    \"facilities\": [\n        \"GYM\",\n        \"RESTAURANT\"\n    ],\n    \"rules\": [\n        \"Unmarried couples not allowed\",\n        \"Smoking and Alcohol not permitted in premises\"\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/stay"
+			},
+			"response": [
+				{
+					"name": "http://localhost:8080/stay",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"MARRIOT GACHIBOWLI\",\n    \"propertyType\": \"HOTEL\",\n    \"rooms\": [\n        {\n            \"roomId\": \"1\",\n            \"roomView\": \"CITY\",\n            \"size\": 220,\n            \"price\": 5000,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Bathtub\",\n                \"Iron board\",\n                \"AC\"\n            ],\n            \"roomCategory\": \"EXECUTIVE\"\n        },\n        {\n            \"roomId\": \"2\",\n            \"roomView\": \"POOL\",\n            \"size\": 260,\n            \"price\": 5400,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Bathtub\",\n                \"Iron board\",\n                \"AC\",\n                \"TV\"\n            ],\n            \"roomCategory\": \"BUSINESS\"\n        }\n    ],\n    \"address\": {\n        \"location\": \"GACHIBOWLI\",\n        \"subLocation\": \"NANAKRAMGUDA\",\n        \"city\": \"Hyderabad\",\n        \"state\": \"TELANGANA\",\n        \"country\": \"INDIA\",\n        \"zipCode\": 500019,\n        \"addressLine1\": \"PLOT NO: 107\",\n        \"addressLine2\": \"Continental Hospital Road\"\n    },\n    \"stayImagesUri\": \"dummy stage image url\",\n    \"propertyRating\": \"FIVESTAR\",\n    \"userRating\": \"FOURSTAR\",\n    \"hasRestaurant\": true,\n    \"restaurants\": [\n        {\n            \"restId\": 1,\n            \"name\": \"TATVA VEG RESTAURANT\",\n            \"cuisines\": [\n                \"VEG\"\n            ],\n            \"restaurantType\": \"RESTUARANT\",\n            \"startTime\": \"08:00\",\n            \"endTime\": \"22:00\"\n        }\n    ],\n    \"facilities\": [\n        \"GYM\",\n        \"RESTAURANT\"\n    ],\n    \"rules\": [\n        \"Unmarried couples not allowed\",\n        \"Smoking and Alcohol not permitted in premises\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/stay"
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 10 Aug 2025 03:33:49 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 11,\n    \"name\": \"MARRIOT GACHIBOWLI\",\n    \"rooms\": [\n        {\n            \"roomId\": 1,\n            \"name\": null,\n            \"roomView\": \"CITY\",\n            \"size\": 220,\n            \"price\": 5000,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Iron board\",\n                \"AC\",\n                \"Bathtub\"\n            ],\n            \"roomCategory\": \"EXECUTIVE\",\n            \"numberOfRooms\": 1\n        },\n        {\n            \"roomId\": 2,\n            \"name\": null,\n            \"roomView\": \"POOL\",\n            \"size\": 260,\n            \"price\": 5400,\n            \"roomImdUri\": \"dummy url\",\n            \"roomFacilities\": [\n                \"Iron board\",\n                \"AC\",\n                \"TV\",\n                \"Bathtub\"\n            ],\n            \"roomCategory\": \"BUSINESS\",\n            \"numberOfRooms\": 1\n        }\n    ],\n    \"hasRestaurant\": true,\n    \"hasGym\": false,\n    \"hasSwimPool\": false,\n    \"address\": {\n        \"location\": \"GACHIBOWLI\",\n        \"subLocation\": \"NANAKRAMGUDA\",\n        \"city\": \"Hyderabad\",\n        \"state\": \"TELANGANA\",\n        \"country\": \"INDIA\",\n        \"zipCode\": 500019,\n        \"addressLine1\": \"PLOT NO: 107\",\n        \"addressLine2\": \"Continental Hospital Road\"\n    },\n    \"stayImagesUri\": \"dummy stage image url\",\n    \"propertyType\": \"HOTEL\",\n    \"propertyRating\": \"FIVESTAR\",\n    \"userRating\": \"FOURSTAR\",\n    \"restaurants\": [\n        {\n            \"restId\": 1,\n            \"name\": \"TATVA VEG RESTAURANT\",\n            \"cuisines\": [\n                \"VEG\"\n            ],\n            \"restaurantType\": \"RESTUARANT\",\n            \"startTime\": \"08:00:00\",\n            \"endTime\": \"22:00:00\"\n        }\n    ],\n    \"isactive\": true,\n    \"facilities\": [\n        \"RESTAURANT\",\n        \"GYM\"\n    ],\n    \"rules\": [\n        \"Unmarried couples not allowed\",\n        \"Smoking and Alcohol not permitted in premises\"\n    ],\n    \"approved\": true\n}"
+				}
+			]
+		}
+	]
+}
