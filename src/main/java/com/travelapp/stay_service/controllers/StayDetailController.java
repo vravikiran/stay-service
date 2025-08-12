@@ -116,12 +116,12 @@ public class StayDetailController {
 	}
 
 	@GetMapping("/location/search")
-	public ResponseEntity<List<StayDetail>> searchResultsInCityLocAndSubLoc(@RequestParam String search) {
-		List<StayDetail> stayDetailList = stayDetailService.searchStays(search);
+	public ResponseEntity<List<StayDetail>> searchResultsInCityLocAndSubLoc(@RequestParam String text) {
+		List<StayDetail> stayDetailList = stayDetailService.searchStays(text);
 		return ResponseEntity.ok(stayDetailList);
 	}
 
-    @GetMapping("/all/city")
+    @GetMapping("group-by-city")
     public ResponseEntity<Map<String,List<StayRoomMappingDto>>> getStaysAndRoomsInfoByCity() {
         Map<String,List<StayRoomMappingDto>> stayAndRoomMap = stayDetailService.getStaysAndRoomsInfoByCity();
         return ResponseEntity.ok(stayAndRoomMap);
