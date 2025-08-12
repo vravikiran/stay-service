@@ -25,10 +25,10 @@ public class StayDetailService {
     StayDetailRepository stayDetailRepository;
 
     public StayDetail createStayDetail(StayDetail stayDetail) throws DuplicateKeyException {
-        /*if (stayDetail.getPropertyType().name().toUpperCase().equals(PropertyTypeEnum.HOMESTAY.name())) {
+        if (Objects.equals(stayDetail.getPropertyType(), PropertyTypeEnum.HOMESTAY.name().toUpperCase())) {
             stayDetail.setApproved(false);
             stayDetail.setIsactive(false);
-        }*/
+        }
         if (stayDetail.getRestaurants() != null && !stayDetail.getRestaurants().isEmpty()) {
             stayDetail.setHasRestaurant(true);
             Set<Restaurant> restaurants = stayDetail.getRestaurants().stream().map(rest -> {
@@ -92,7 +92,7 @@ public class StayDetailService {
         Optional<StayDetail> stayDetailOpt = stayDetailRepository.findById(id);
         if (stayDetailOpt.isPresent()) {
             StayDetail stayDetail = stayDetailOpt.get();
-            if (stayDetail.getPropertyType().equals(PropertyTypeEnum.HOMESTAY)) {
+            if (Objects.equals(stayDetail.getPropertyType(), PropertyTypeEnum.HOMESTAY.name().toUpperCase())) {
                 stayDetail.setApproved(true);
                 stayDetail.setIsactive(true);
                 stayDetail.setUpdatedDate(LocalDate.now());
