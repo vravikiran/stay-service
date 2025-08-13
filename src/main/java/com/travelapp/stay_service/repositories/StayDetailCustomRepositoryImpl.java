@@ -31,41 +31,41 @@ import com.travelapp.stay_service.util.Constants;
 public class StayDetailCustomRepositoryImpl implements StayDetailCustomRepository {
 	@Autowired
 	MongoTemplate mongoTemplate;
-	//mongodb://admin:walnut16%40@localhost:27017/?authSource=admin
 
-	@Override
-	public Page<StayDetail> searchStays(String city, String location, String subLocation, String propertyType,
-			String propertyRating, String userRating, int page, int size) {
-		Pattern cityPattern = Pattern.compile("^" + Pattern.quote(city) + "$", Pattern.CASE_INSENSITIVE);
-		Criteria criteria = Criteria.where(Constants.CITY).regex(cityPattern);
-		if (location != null) {
-			Pattern locPattern = Pattern.compile("^" + Pattern.quote(location) + "$", Pattern.CASE_INSENSITIVE);
-			criteria.and(Constants.LOCATION).regex(locPattern);
-		}
-		if (subLocation != null) {
-			Pattern subLocPattern = Pattern.compile("^" + Pattern.quote(subLocation) + "$", Pattern.CASE_INSENSITIVE);
-			criteria.and(Constants.SUBLOCATION).regex(subLocPattern);
-		}
-		if (propertyType != null) {
+    @Override
+    public Page<StayDetail> searchStays(String city, String location, String subLocation, String propertyType,
+                                        String propertyRating, String userRating, int page, int size) {
+        Criteria criteria = Criteria.where(Constants.CITY)
+                .regex("^" + Pattern.quote(city) + "$", "i");
+
+        if (location != null && !location.isBlank()) {
+            criteria.and(Constants.LOCATION)
+                    .regex("^" + Pattern.quote(location) + "$", "i");
+        }
+        if (subLocation != null && !subLocation.isBlank()) {
+            criteria.and(Constants.SUBLOCATION)
+                    .regex("^" + Pattern.quote(subLocation) + "$", "i");
+        }
+        if (propertyType != null && !propertyType.isBlank()) {
             criteria.and(Constants.PROPERTYTYPE).is(PropertyTypeEnum.valueOf(propertyType.toUpperCase()).name());
         }
-		if (propertyRating != null) {
-			criteria.and(Constants.PROPERTYRATING).is(PropertyRatingEnum.valueOf(propertyRating.toUpperCase()).name());
-		}
-		if (userRating != null) {
-			criteria.and(Constants.USERRATING).is(UserRatingEnum.valueOf(userRating.toUpperCase()).name());
-		}
-		Query query = new Query(criteria);
-		query.with(PageRequest.of(page, size));
-		List<StayDetail> stays = mongoTemplate.find(query, StayDetail.class);
-		Map<Object, Set<Object>> stayWithRooms =  stays.stream().collect(Collectors.groupingBy(StayDetail::getId, Collectors.mapping(StayDetail::getRooms, Collectors.toSet())));
-		System.out.println(stayWithRooms.size());
-		long count = mongoTemplate.count(Query.of(query).limit(-1).skip(-1), StayDetail.class);
-		return new PageImpl<>(stays, PageRequest.of(page, size), count);
-	}
+        if (propertyRating != null && !propertyRating.isBlank()) {
+            criteria.and(Constants.PROPERTYRATING).is(PropertyRatingEnum.valueOf(propertyRating.toUpperCase()).name());
+        }
+        if (userRating != null && !userRating.isBlank()) {
+            criteria.and(Constants.USERRATING).is(UserRatingEnum.valueOf(userRating.toUpperCase()).name());
+        }
+
+        Query query = new Query(criteria);
+        query.with(PageRequest.of(page, size));
+        List<StayDetail> stays = mongoTemplate.find(query, StayDetail.class);
+        Map<Object, Set<Object>> stayWithRooms = stays.stream().collect(Collectors.groupingBy(StayDetail::getId, Collectors.mapping(StayDetail::getRooms, Collectors.toSet())));
+        long count = mongoTemplate.count(Query.of(query).limit(-1).skip(-1), StayDetail.class);
+        return new PageImpl<>(stays, PageRequest.of(page, size), count);
+    }
 
 	@Override
-	public StayDetail updateRestaurantDetailsAtStay(String stayId, int restId, Map<String, Object> updatedFields)
+	public StayDetail updateRestaurantDetailsAtStay(Long stayId, int restId, Map<String, Object> updatedFields)
 			throws RestaurantNotFoundException {
 		Query query = new Query(Criteria.where(Constants.STAYID).is(stayId).and(Constants.REST_RESTID).is(restId));
 		if (mongoTemplate.exists(query, StayDetail.class)) {
@@ -92,7 +92,7 @@ public class StayDetailCustomRepositoryImpl implements StayDetailCustomRepositor
 	}
 
 	@Override
-	public void removeRestuarantFromStay(String stayId, int restId) throws RestaurantNotFoundException {
+	public void removeRestuarantFromStay(Long stayId, int restId) throws RestaurantNotFoundException {
 		Query query = new Query(Criteria.where(Constants.STAYID).is(stayId).and(Constants.REST_RESTID).is(restId));
 		if (mongoTemplate.exists(query, StayDetail.class)) {
 			Update update = new Update().pull(Constants.RESTAURANTS,
@@ -100,7 +100,7 @@ public class StayDetailCustomRepositoryImpl implements StayDetailCustomRepositor
 			mongoTemplate.updateFirst(query, update, StayDetail.class);
 			Query fetchQuery = new Query(Criteria.where(Constants.STAYID).is(stayId));
 			StayDetail stayDetail = mongoTemplate.findOne(fetchQuery, StayDetail.class);
-			if (stayDetail != null && (stayDetail.getRestaurants().isEmpty() || stayDetail.getRestaurants() == null)) {
+			if (stayDetail != null && stayDetail.getRestaurants().isEmpty()) {
 				Update stayUpdate = new Update().set(Constants.HAS_RESTAURANT, false);
 				update.set(Constants.UPDATED_DATE, LocalDate.now());
 				mongoTemplate.updateFirst(fetchQuery, stayUpdate, StayDetail.class);
@@ -111,7 +111,7 @@ public class StayDetailCustomRepositoryImpl implements StayDetailCustomRepositor
 	}
 
 	@Override
-	public void updateRoomFacilities(String stayId, int roomId, Set<String> roomFacilities)
+	public void updateRoomFacilities(Long stayId, int roomId, Set<String> roomFacilities)
 			throws RoomDetailNotFoundException {
 		Query query = new Query(Criteria.where(Constants.STAYID).is(stayId).and(Constants.ROOMID).is(roomId));
 		if (mongoTemplate.exists(query, StayDetail.class)) {
@@ -124,7 +124,7 @@ public class StayDetailCustomRepositoryImpl implements StayDetailCustomRepositor
 	}
 
 	@Override
-	public StayDetail updateStay(String stayId, Map<String, Object> updatedFields) throws StayNotFoundException {
+	public StayDetail updateStay(Long stayId, Map<String, Object> updatedFields) throws StayNotFoundException {
 		Query query = new Query(Criteria.where(Constants.STAYID).is(stayId));
 		if(mongoTemplate.exists(query,StayDetail.class)) {
 			Update update = new Update().set(Constants.UPDATED_DATE, LocalDate.now());
@@ -147,7 +147,7 @@ public class StayDetailCustomRepositoryImpl implements StayDetailCustomRepositor
 	}
 
 	@Override
-	public void updateRoomPrice(String stayId, int roomId, double price) throws RoomDetailNotFoundException {
+	public void updateRoomPrice(Long stayId, int roomId, double price) throws RoomDetailNotFoundException {
 		Query query = new Query(Criteria.where(Constants.STAYID).is(stayId).and(Constants.ROOMID).is(roomId));
 		if (mongoTemplate.exists(query, StayDetail.class)) {
 			Update update = new Update().set(Constants.ROOM_PRICE, price);

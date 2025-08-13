@@ -48,7 +48,7 @@ public class StayDetailService {
         }
     }
 
-    public void deactivateStay(String id) throws StayNotFoundException {
+    public void deactivateStay(long id) throws StayNotFoundException {
         Optional<StayDetail> stayDetailOpt = stayDetailRepository.findById(id);
         if (stayDetailOpt.isPresent()) {
             StayDetail stayDetail = stayDetailOpt.get();
@@ -60,7 +60,7 @@ public class StayDetailService {
         }
     }
 
-    public void activateStay(String id) throws StayNotFoundException {
+    public void activateStay(Long id) throws StayNotFoundException {
         Optional<StayDetail> stayDetailOpt = stayDetailRepository.findById(id);
         if (stayDetailOpt.isPresent()) {
             StayDetail stayDetail = stayDetailOpt.get();
@@ -73,7 +73,7 @@ public class StayDetailService {
 
     }
 
-    public StayDetail getStayDetail(String id) throws StayNotFoundException {
+    public StayDetail getStayDetail(Long id) throws StayNotFoundException {
         Optional<StayDetail> stayDetailOpt = stayDetailRepository.findById(id);
         if (stayDetailOpt.isPresent()) {
             return stayDetailOpt.get();
@@ -88,7 +88,7 @@ public class StayDetailService {
                 page, size);
     }
 
-    public void approveHomeStay(String id) throws StayNotFoundException, InvalidDataException {
+    public void approveHomeStay(Long id) throws StayNotFoundException, InvalidDataException {
         Optional<StayDetail> stayDetailOpt = stayDetailRepository.findById(id);
         if (stayDetailOpt.isPresent()) {
             StayDetail stayDetail = stayDetailOpt.get();
@@ -105,7 +105,7 @@ public class StayDetailService {
         }
     }
 
-    public StayDetail updateRestaurantDetailsAtStay(String stayId, int restId, Map<String, Object> updatedFields)
+    public StayDetail updateRestaurantDetailsAtStay(Long stayId, int restId, Map<String, Object> updatedFields)
             throws StayNotFoundException, RestaurantNotFoundException {
         if (stayDetailRepository.existsById(stayId)) {
             return stayDetailRepository.updateRestaurantDetailsAtStay(stayId, restId, updatedFields);
@@ -114,7 +114,7 @@ public class StayDetailService {
         }
     }
 
-    public StayDetail addNewRestaurantToStay(String stayId, Restaurant restaurant)
+    public StayDetail addNewRestaurantToStay(Long stayId, Restaurant restaurant)
             throws StayNotFoundException, DuplicateRestaurantException {
         Optional<StayDetail> stayDetailOpt = stayDetailRepository.findById(stayId);
         if (stayDetailOpt.isPresent()) {
@@ -141,7 +141,7 @@ public class StayDetailService {
         }
     }
 
-    public void removeRestaurantFromStay(String stayId, int restId)
+    public void removeRestaurantFromStay(Long stayId, int restId)
             throws RestaurantNotFoundException, StayNotFoundException {
         if (stayDetailRepository.existsById(stayId)) {
             stayDetailRepository.removeRestuarantFromStay(stayId, restId);
@@ -150,7 +150,7 @@ public class StayDetailService {
         }
     }
 
-    public void updateRoomFacilities(String stayId, int roomId, Set<String> roomFacilities)
+    public void updateRoomFacilities(Long stayId, int roomId, Set<String> roomFacilities)
             throws StayNotFoundException, RoomDetailNotFoundException {
         if (stayDetailRepository.existsById(stayId)) {
             stayDetailRepository.updateRoomFacilities(stayId, roomId, roomFacilities);
@@ -159,7 +159,7 @@ public class StayDetailService {
         }
     }
 
-    public StayDetail updateStay(String stayId, Map<String, Object> updatedFields)
+    public StayDetail updateStay(Long stayId, Map<String, Object> updatedFields)
             throws StayNotFoundException, DuplicateKeyException {
         StayDetail stayDetail = null;
         if (stayDetailRepository.existsById(stayId)) {
@@ -174,7 +174,7 @@ public class StayDetailService {
         }
     }
 
-    public void updateRoomPrice(String stayId, int roomId, double price)
+    public void updateRoomPrice(Long stayId, int roomId, double price)
             throws StayNotFoundException, RoomDetailNotFoundException {
         if (stayDetailRepository.existsById(stayId)) {
             stayDetailRepository.updateRoomPrice(stayId, roomId, price);

@@ -37,19 +37,19 @@ public class StayDetailController {
 	}
 
 	@PatchMapping("/activate")
-	public ResponseEntity<String> makeStayOperational(@RequestParam String id) throws StayNotFoundException {
+	public ResponseEntity<String> makeStayOperational(@RequestParam long id) throws StayNotFoundException {
 		stayDetailService.activateStay(id);
 		return ResponseEntity.ok("Stay operational for business");
 	}
 
 	@PatchMapping("/deactivate")
-	public ResponseEntity<String> suspendOpOfStay(@RequestParam String id) throws StayNotFoundException {
+	public ResponseEntity<String> suspendOpOfStay(@RequestParam long id) throws StayNotFoundException {
 		stayDetailService.deactivateStay(id);
 		return ResponseEntity.ok("Stay operations suspended/terminated successfully");
 	}
 
 	@GetMapping("/detail/id")
-	public ResponseEntity<StayDetail> getStayDetails(@RequestParam String id) throws StayNotFoundException {
+	public ResponseEntity<StayDetail> getStayDetails(@RequestParam long id) throws StayNotFoundException {
 		StayDetail stayDetail = stayDetailService.getStayDetail(id);
 		return ResponseEntity.ok(stayDetail);
 	}
@@ -67,49 +67,49 @@ public class StayDetailController {
 	}
 
 	@PatchMapping("/approve")
-	public ResponseEntity<String> approveHomeStay(@RequestParam String id) throws StayNotFoundException, InvalidDataException {
+	public ResponseEntity<String> approveHomeStay(@RequestParam long id) throws StayNotFoundException, InvalidDataException {
 		stayDetailService.approveHomeStay(id);
 		return ResponseEntity.ok("Home stay approved successfully");
 	}
 
 	@PatchMapping("/update/restaurant")
 	public ResponseEntity<StayDetail> updateRestaurantDetailsAtStay(@RequestParam(required = true) int restId,
-			@RequestParam(required = true) String stayId, @RequestBody Map<String, Object> updatedFields)
+			@RequestParam(required = true) Long stayId, @RequestBody Map<String, Object> updatedFields)
 			throws StayNotFoundException, RestaurantNotFoundException {
 		StayDetail stayDetail = stayDetailService.updateRestaurantDetailsAtStay(stayId, restId, updatedFields);
 		return ResponseEntity.ok(stayDetail);
 	}
 
 	@PatchMapping("/add/restaurant")
-	public ResponseEntity<StayDetail> addNewRestaurantAtStay(@RequestParam String stayId,
+	public ResponseEntity<StayDetail> addNewRestaurantAtStay(@RequestParam long stayId,
 			@RequestBody Restaurant restaurant) throws StayNotFoundException, DuplicateRestaurantException {
 		StayDetail stayDetail = stayDetailService.addNewRestaurantToStay(stayId, restaurant);
 		return ResponseEntity.ok(stayDetail);
 	}
 
 	@DeleteMapping("/remove/restaurant")
-	public ResponseEntity<String> removeRestuarantFromStay(@RequestParam String stayId, @RequestParam int restId)
+	public ResponseEntity<String> removeRestuarantFromStay(@RequestParam Long stayId, @RequestParam int restId)
 			throws RestaurantNotFoundException, StayNotFoundException {
 		stayDetailService.removeRestaurantFromStay(stayId, restId);
 		return ResponseEntity.ok("Restaurant removed successfully from stay");
 	}
 
 	@PatchMapping("/room/facilities")
-	public ResponseEntity<String> updateRoomFacilities(@RequestParam String stayId, @RequestParam int roomId,
+	public ResponseEntity<String> updateRoomFacilities(@RequestParam long stayId, @RequestParam int roomId,
 			@RequestBody Set<String> roomFacilities) throws StayNotFoundException, RoomDetailNotFoundException {
 		stayDetailService.updateRoomFacilities(stayId, roomId, roomFacilities);
 		return ResponseEntity.ok("Room facilities are updated successfully");
 	}
 
 	@PatchMapping("/update")
-	public ResponseEntity<StayDetail> updateStay(@RequestParam String stayId,
+	public ResponseEntity<StayDetail> updateStay(@RequestParam long stayId,
 			@RequestBody Map<String, Object> updatedFields) throws StayNotFoundException, DuplicateKeyException {
 		StayDetail stayDetail = stayDetailService.updateStay(stayId, updatedFields);
 		return ResponseEntity.ok(stayDetail);
 	}
 	
 	@PatchMapping("/room/price/update")
-	public ResponseEntity<String> updateRoomPrice(@RequestParam String stayId, @RequestParam int roomId,
+	public ResponseEntity<String> updateRoomPrice(@RequestParam long stayId, @RequestParam int roomId,
 			@RequestParam double price) throws StayNotFoundException, RoomDetailNotFoundException {
 		stayDetailService.updateRoomPrice(stayId, roomId, price);
 		return ResponseEntity.ok("Room price updated successfully");

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.travelapp.stay_service.entities.StayDetail;
 
 @Repository
-public interface StayDetailRepository extends MongoRepository<StayDetail, String>, StayDetailCustomRepository {
+public interface StayDetailRepository extends MongoRepository<StayDetail, Long>, StayDetailCustomRepository {
 
 }

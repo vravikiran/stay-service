@@ -17,17 +17,17 @@ public interface StayDetailCustomRepository {
 	public Page<StayDetail> searchStays(String city, String location, String subLocation, String propertyType,
 			String propertyRating, String userRating, int page, int size);
 
-	public StayDetail updateRestaurantDetailsAtStay(String stayId, int restId, Map<String, Object> updatedFields)
+	public StayDetail updateRestaurantDetailsAtStay(Long stayId, int restId, Map<String, Object> updatedFields)
 			throws RestaurantNotFoundException;
 
-	public void removeRestuarantFromStay(String stayId, int restId) throws RestaurantNotFoundException;
+	public void removeRestuarantFromStay(Long stayId, int restId) throws RestaurantNotFoundException;
 
-	public void updateRoomFacilities(String stayId, int roomId, Set<String> roomFacilities)
+	public void updateRoomFacilities(Long stayId, int roomId, Set<String> roomFacilities)
 			throws RoomDetailNotFoundException;
 
-	public StayDetail updateStay(String stayId, Map<String, Object> updatedFields) throws StayNotFoundException;
+	public StayDetail updateStay(Long stayId, Map<String, Object> updatedFields) throws StayNotFoundException;
 
-	public void updateRoomPrice(String stayId, int roomId, double price) throws RoomDetailNotFoundException;
+	public void updateRoomPrice(Long stayId, int roomId, double price) throws RoomDetailNotFoundException;
 
 	public List<StayDetail> search(String  textToSearch);
 
