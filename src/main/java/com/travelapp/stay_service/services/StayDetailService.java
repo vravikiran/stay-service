@@ -27,7 +27,7 @@ public class StayDetailService {
     public StayDetail createStayDetail(StayDetail stayDetail) throws DuplicateKeyException {
         if (Objects.equals(stayDetail.getPropertyType(), PropertyTypeEnum.HOMESTAY.name().toUpperCase())) {
             stayDetail.setApproved(false);
-            stayDetail.setIsactive(false);
+            stayDetail.setActive(false);
         }
         if (stayDetail.getRestaurants() != null && !stayDetail.getRestaurants().isEmpty()) {
             stayDetail.setHasRestaurant(true);
@@ -52,7 +52,7 @@ public class StayDetailService {
         Optional<StayDetail> stayDetailOpt = stayDetailRepository.findById(id);
         if (stayDetailOpt.isPresent()) {
             StayDetail stayDetail = stayDetailOpt.get();
-            stayDetail.setIsactive(false);
+            stayDetail.setActive(false);
             stayDetail.setUpdatedDate(LocalDate.now());
             stayDetailRepository.save(stayDetail);
         } else {
@@ -65,7 +65,7 @@ public class StayDetailService {
         if (stayDetailOpt.isPresent()) {
             StayDetail stayDetail = stayDetailOpt.get();
             stayDetail.setUpdatedDate(LocalDate.now());
-            stayDetail.setIsactive(true);
+            stayDetail.setActive(true);
             stayDetailRepository.save(stayDetail);
         } else {
             throw new StayNotFoundException("No stay found with given id :: " + id);
@@ -94,7 +94,7 @@ public class StayDetailService {
             StayDetail stayDetail = stayDetailOpt.get();
             if (Objects.equals(stayDetail.getPropertyType(), PropertyTypeEnum.HOMESTAY.name().toUpperCase())) {
                 stayDetail.setApproved(true);
-                stayDetail.setIsactive(true);
+                stayDetail.setActive(true);
                 stayDetail.setUpdatedDate(LocalDate.now());
                 stayDetailRepository.save(stayDetail);
             } else {

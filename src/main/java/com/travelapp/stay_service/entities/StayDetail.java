@@ -40,8 +40,8 @@ public class StayDetail {
     private String userRating;
     @Valid
     private Set<Restaurant> restaurants;
-    private boolean isactive = true;
-    private boolean isApproved = true;
+    private boolean active = true;
+    private boolean approved = true;
     private Set<String> facilities;
     private Set<String> rules;
     @JsonIgnore
