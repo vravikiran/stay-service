@@ -88,7 +88,7 @@ public class StayDetailController {
 	}
 
 	@DeleteMapping("/remove/restaurant")
-	public ResponseEntity<String> removeRestuarantFromStay(@RequestParam Long stayId, @RequestParam int restId)
+	public ResponseEntity<String> removeRestaurantFromStay(@RequestParam Long stayId, @RequestParam int restId)
 			throws RestaurantNotFoundException, StayNotFoundException {
 		stayDetailService.removeRestaurantFromStay(stayId, restId);
 		return ResponseEntity.ok("Restaurant removed successfully from stay");

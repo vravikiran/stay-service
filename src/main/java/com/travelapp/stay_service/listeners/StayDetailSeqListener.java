@@ -8,12 +8,12 @@ import org.springframework.data.mongodb.core.mapping.event.BeforeConvertEvent;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StayDetailListener extends AbstractMongoEventListener<StayDetail> {
+public class StayDetailSeqListener extends AbstractMongoEventListener<StayDetail> {
 
     private final SequenceGeneratorService sequenceGenerator;
 
     @Autowired
-    public StayDetailListener(SequenceGeneratorService sequenceGenerator) {
+    public StayDetailSeqListener(SequenceGeneratorService sequenceGenerator) {
         this.sequenceGenerator = sequenceGenerator;
     }
 
