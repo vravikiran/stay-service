@@ -4,8 +4,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.travelapp.stay_service.entities.StayRoomMappingDto;
-import com.travelapp.stay_service.exceptions.*;
+
+import com.travelapp.stay_service.exceptions.DuplicateRestaurantException;
+import com.travelapp.stay_service.exceptions.InvalidDataException;
+import com.travelapp.stay_service.exceptions.RestaurantNotFoundException;
+import com.travelapp.stay_service.exceptions.RoomDetailNotFoundException;
+import com.travelapp.stay_service.exceptions.StayNotFoundException;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -31,7 +37,7 @@ public class StayDetailController {
 	StayDetailService stayDetailService;
 
 	@PostMapping
-	public ResponseEntity<StayDetail> createStay(@Valid  @RequestBody StayDetail stayDetail) throws DuplicateKeyException {
+	public ResponseEntity<StayDetail> createStay(@Valid  @RequestBody StayDetail stayDetail) throws DuplicateKeyException, JsonProcessingException {
 		StayDetail createdStay = stayDetailService.createStayDetail(stayDetail);
 		return ResponseEntity.ok(createdStay);
 	}
@@ -73,8 +79,8 @@ public class StayDetailController {
 	}
 
 	@PatchMapping("/update/restaurant")
-	public ResponseEntity<StayDetail> updateRestaurantDetailsAtStay(@RequestParam(required = true) int restId,
-			@RequestParam(required = true) Long stayId, @RequestBody Map<String, Object> updatedFields)
+	public ResponseEntity<StayDetail> updateRestaurantDetailsAtStay(@RequestParam int restId,
+			@RequestParam Long stayId, @RequestBody Map<String, Object> updatedFields)
 			throws StayNotFoundException, RestaurantNotFoundException {
 		StayDetail stayDetail = stayDetailService.updateRestaurantDetailsAtStay(stayId, restId, updatedFields);
 		return ResponseEntity.ok(stayDetail);

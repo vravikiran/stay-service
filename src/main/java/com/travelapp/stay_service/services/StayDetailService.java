@@ -1,17 +1,25 @@
 package com.travelapp.stay_service.services;
 
 import java.time.LocalDate;
-import java.util.*;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.travelapp.stay_service.entities.*;
 import com.travelapp.stay_service.exceptions.StayNotFoundException;
 import com.travelapp.stay_service.exceptions.InvalidDataException;
 import com.travelapp.stay_service.exceptions.RoomDetailNotFoundException;
 import com.travelapp.stay_service.exceptions.RestaurantNotFoundException;
 import com.travelapp.stay_service.exceptions.DuplicateRestaurantException;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.travelapp.stay_service.producers.StayDetailPublisher;
+import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -20,11 +28,13 @@ import com.travelapp.stay_service.enums.PropertyTypeEnum;
 import com.travelapp.stay_service.repositories.StayDetailRepository;
 
 @Service
+@RequiredArgsConstructor
 public class StayDetailService {
-    @Autowired
-    StayDetailRepository stayDetailRepository;
 
-    public StayDetail createStayDetail(StayDetail stayDetail) throws DuplicateKeyException {
+    private final StayDetailRepository stayDetailRepository;
+    private final StayDetailPublisher stayDetailPublisher;
+
+    public StayDetail createStayDetail(StayDetail stayDetail) throws DuplicateKeyException, JsonProcessingException {
         if (Objects.equals(stayDetail.getPropertyType(), PropertyTypeEnum.HOMESTAY.name().toUpperCase())) {
             stayDetail.setApproved(false);
             stayDetail.setActive(false);
@@ -41,7 +51,9 @@ public class StayDetailService {
         stayDetail.setCreatedDate(LocalDate.now());
         stayDetail.setUpdatedDate(LocalDate.now());
         try {
-            return stayDetailRepository.save(stayDetail);
+            stayDetail = stayDetailRepository.save(stayDetail);
+            stayDetailPublisher.publish(stayDetail);
+            return stayDetail;
         } catch (DuplicateKeyException exception) {
             System.out.println("exception :: " + exception.getMessage());
             throw new DuplicateKeyException("A stay already exists at given address");
