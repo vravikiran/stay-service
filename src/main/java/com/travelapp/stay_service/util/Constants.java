@@ -30,4 +30,6 @@ public class Constants {
 	public static final String STAY_RULES ="rules";
 	public static final String ROOM_PRICE ="rooms.$.price";
 	public static final String STAY_DETAIL_TOPIC ="mongo-cdc.travelapp.StayDetail";
+	public static final String CREATE="c";
+	public static final String UPDATE="u";
 }

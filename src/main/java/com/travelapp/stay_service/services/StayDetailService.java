@@ -19,6 +19,7 @@ import com.travelapp.stay_service.exceptions.RoomDetailNotFoundException;
 import com.travelapp.stay_service.exceptions.RestaurantNotFoundException;
 import com.travelapp.stay_service.exceptions.DuplicateRestaurantException;
 import com.travelapp.stay_service.producers.StayDetailPublisher;
+import com.travelapp.stay_service.util.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
@@ -52,7 +53,7 @@ public class StayDetailService {
         stayDetail.setUpdatedDate(LocalDate.now());
         try {
             stayDetail = stayDetailRepository.save(stayDetail);
-            stayDetailPublisher.publish(stayDetail);
+            stayDetailPublisher.publish(stayDetail, Constants.CREATE);
             return stayDetail;
         } catch (DuplicateKeyException exception) {
             System.out.println("exception :: " + exception.getMessage());
@@ -60,25 +61,27 @@ public class StayDetailService {
         }
     }
 
-    public void deactivateStay(long id) throws StayNotFoundException {
+    public void deactivateStay(long id) throws StayNotFoundException, JsonProcessingException {
         Optional<StayDetail> stayDetailOpt = stayDetailRepository.findById(id);
         if (stayDetailOpt.isPresent()) {
             StayDetail stayDetail = stayDetailOpt.get();
             stayDetail.setActive(false);
             stayDetail.setUpdatedDate(LocalDate.now());
-            stayDetailRepository.save(stayDetail);
+            stayDetail = stayDetailRepository.save(stayDetail);
+            stayDetailPublisher.publish(stayDetail,Constants.UPDATE);
         } else {
             throw new StayNotFoundException("No stay found with given id :: " + id);
         }
     }
 
-    public void activateStay(Long id) throws StayNotFoundException {
+    public void activateStay(Long id) throws StayNotFoundException, JsonProcessingException {
         Optional<StayDetail> stayDetailOpt = stayDetailRepository.findById(id);
         if (stayDetailOpt.isPresent()) {
             StayDetail stayDetail = stayDetailOpt.get();
             stayDetail.setUpdatedDate(LocalDate.now());
             stayDetail.setActive(true);
-            stayDetailRepository.save(stayDetail);
+            stayDetail = stayDetailRepository.save(stayDetail);
+            stayDetailPublisher.publish(stayDetail,Constants.UPDATE);
         } else {
             throw new StayNotFoundException("No stay found with given id :: " + id);
         }
@@ -172,11 +175,12 @@ public class StayDetailService {
     }
 
     public StayDetail updateStay(Long stayId, Map<String, Object> updatedFields)
-            throws StayNotFoundException, DuplicateKeyException {
-        StayDetail stayDetail = null;
+            throws StayNotFoundException, DuplicateKeyException, JsonProcessingException {
+        StayDetail stayDetail;
         if (stayDetailRepository.existsById(stayId)) {
             try {
                 stayDetail = stayDetailRepository.updateStay(stayId, updatedFields);
+                stayDetailPublisher.publish(stayDetail,Constants.UPDATE);
             } catch (DuplicateKeyException duplicateKeyException) {
                 throw new DuplicateKeyException("A stay already exists with given name and address");
             }

@@ -43,13 +43,13 @@ public class StayDetailController {
 	}
 
 	@PatchMapping("/activate")
-	public ResponseEntity<String> makeStayOperational(@RequestParam long id) throws StayNotFoundException {
+	public ResponseEntity<String> makeStayOperational(@RequestParam long id) throws StayNotFoundException, JsonProcessingException {
 		stayDetailService.activateStay(id);
 		return ResponseEntity.ok("Stay operational for business");
 	}
 
 	@PatchMapping("/deactivate")
-	public ResponseEntity<String> suspendOpOfStay(@RequestParam long id) throws StayNotFoundException {
+	public ResponseEntity<String> suspendOpOfStay(@RequestParam long id) throws StayNotFoundException, JsonProcessingException {
 		stayDetailService.deactivateStay(id);
 		return ResponseEntity.ok("Stay operations suspended/terminated successfully");
 	}
@@ -109,7 +109,7 @@ public class StayDetailController {
 
 	@PatchMapping("/update")
 	public ResponseEntity<StayDetail> updateStay(@RequestParam long stayId,
-			@RequestBody Map<String, Object> updatedFields) throws StayNotFoundException, DuplicateKeyException {
+			@RequestBody Map<String, Object> updatedFields) throws StayNotFoundException, DuplicateKeyException, JsonProcessingException {
 		StayDetail stayDetail = stayDetailService.updateStay(stayId, updatedFields);
 		return ResponseEntity.ok(stayDetail);
 	}
